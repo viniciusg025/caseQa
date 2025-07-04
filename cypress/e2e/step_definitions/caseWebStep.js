@@ -10,7 +10,6 @@ When ("clico nos 3 botoes principais apresentados na tela", () => {
     caseWebPage.clicarNos3BotoesPrincipais()
 })  
 
-
 When ("clico em todos os botoes de edit e delet da grid", () => {
     caseWebPage.clicarEmTodosEditDeletDaGrid()
 }) 
