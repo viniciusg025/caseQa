@@ -23,6 +23,5 @@ jobs:
         run: npm install
 
       - name: Rodar testes de API
-        run: npx cypress run --spec "cypress/e2e/**/*.cy.js"
+        run: npx cypress run --spec "cypress/e2e/**/*.cy.js" 
  
-        
