@@ -1,0 +1,26 @@
+name: Cypress API Tests
+
+on:
+  push:
+    branches: [automacaoApi]
+  pull_request:
+    branches: [automacaoApi]
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Rodar testes de API
+        run: npx cypress run --spec "cypress/e2e/**/*.cy.js"
