@@ -71,7 +71,8 @@ describe('API - Users', () => {
       expect(response.body).to.have.property('email', 'vinnetester@gmail.com');
     });
   });
-
+ 
+  
 
   it('DELETE - Deletar usuário', () => {
       cy.deleteUser(9).then((response) => {
