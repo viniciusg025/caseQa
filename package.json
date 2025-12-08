@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "chai": "^5.2.0",
-    "cypress": "^12.0.2",
+    "cypress": "^12.17.4",
     "cypress-plugin-api": "^2.11.2",
     "mochawesome": "^7.1.3"
   }

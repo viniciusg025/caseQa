@@ -1,83 +1,51 @@
 describe('API - Users', () => {
-  const url = 'http://jsonplaceholder.typicode.com/users';
+  const url = 'https://serverest.dev';
+  const IdMeuUser = 'XsCV1AL4H7ZNQlW4';
 
-  it('GET - Listar usuários', () => {
-    cy.request('GET', url).then((response) => {
+  it('GET - Listar todos usuários', () => {
+    cy.request('GET', url + '/usuarios').then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body).to.exist;
-      expect(response.body).to.not.be.empty;
-      expect(response.body).to.be.an('array');
-      expect(response.body[0]).to.have.property('id');
     });
   });
 
-  it('POST - Criar usuário', () => {
-    cy.request('POST', url, {
-      "name": "Vinicius",
-      "username": "viniciusg025",
-      "email": "vinnetester@gmail.com",
-      "address": {
-      "street": "Dayna Park",
-      "suite": "Suite 449",
-      "city": "Bartholomebury",
-      "zipcode": "76495-3109",
-      "geo": {
-        "lat": "24.6463",
-        "lng": "-168.8889"
-      }
-    },
-    "phone": "(775)976-6794 x41206",
-    "website": "conrad.com",
-    "company": {
-      "name": "Yost and Sons",
-      "catchPhrase": "Switchable contextually-based project",
-      "bs": "aggregate real-time technologies"
-    }
+
+  it('POST - Criar um novo usuário', () => {
+    cy.request('POST', url + '/usuarios', {
+      "nome": "Vinicius QA",
+      "email": "vinnesantos025257@gmail.com",
+      "password": "vinicius@025",
+      "administrador": "true"
     }).then((response) => {
       expect(response.status).to.eq(201);
-      expect(response.body).to.have.property('name', 'Vinicius');
-      expect(response.body).to.have.property('username', 'viniciusg025');
-      expect(response.body).to.have.property('email', 'vinnetester@gmail.com');
+      expect(response.body).to.have.property('message', 'Cadastro realizado com sucesso');
     });
   });
 
 
-  it('PUT - Atualizar usuário', () => {
-    cy.request('PUT', `${url}/1`, {
-      "name": "Vinicius",
-      "username": "viniciusg025",
-      "email": "vinnetester@gmail.com",
-      "address": {
-      "street": "Dayna Park",
-      "suite": "Suite 449",
-      "city": "Bartholomebury",
-      "zipcode": "76495-3109",
-      "geo": {
-        "lat": "24.6463",
-        "lng": "-168.8889"
-      }
-    },
-    "phone": "(775)976-6794 x41206",
-    "website": "conrad.com",
-    "company": {
-      "name": "Yost and Sons",
-      "catchPhrase": "Switchable contextually-based project",
-      "bs": "aggregate real-time technologies"
-    }
+  it('GET - Listar usuário por id', () => {
+    cy.request('GET', url + '/usuarios/XsCV1AL4H7ZNQlW4').then((response) => {
+      expect(response.status).to.eq(200);
+      expect(response.body).to.have.property('_id', IdMeuUser);
+    });
+  });
+
+
+  it('PUT - Atualiza as informações de um usuário.', () => {
+    cy.request('put', url + '/usuarios/' + IdMeuUser, {
+      "nome": "Vinicius QA Atualizado",
+      "email": "vinnesantos025@gmail.com",
+      "password": "vinicius@0255",
+      "administrador": "true"
     }).then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body).to.have.property('name', 'Vinicius');
-      expect(response.body).to.have.property('username', 'viniciusg025');
-      expect(response.body).to.have.property('email', 'vinnetester@gmail.com');
+      expect(response.body).to.have.property('message', 'Registro alterado com sucesso');
     });
   });
- 
-  
 
-  it('DELETE - Deletar usuário', () => {
-      cy.deleteUser(9).then((response) => {
+
+   it('DELETE - Deletar usuário por id', () => {
+    cy.request('DELETE', url + '/usuarios/93mrzLBcQelB3MaA').then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body).to.be.empty;
     });
   });
 });
